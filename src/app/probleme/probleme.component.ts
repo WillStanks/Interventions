@@ -64,7 +64,7 @@ export class ProblemeComponent implements OnInit {
       courrielConfirmationControl.enable();
     }
     else if(typeNotifications === 'Par message texte') {
-      telephoneControl.setValidators([Validators.required]);
+      telephoneControl.setValidators([Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10), Validators.maxLength(10)]);
       telephoneControl.enable();
     }
 
