@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { emailMatcherValidator } from '../shared/email-matcher/email-matcher.component';
 import { VerifierCaracteresValidator } from '../shared/longueur-minimum/longueur-minimum.component';
 import { TypeProblemeService } from './type-probleme.service';
 import { ITypeProbleme } from './typeProbleme';
@@ -56,19 +57,20 @@ export class ProblemeComponent implements OnInit {
 
 
     if(typeNotifications === 'Par courriel'){
-      courrielControl.setValidators([Validators.required]);
+      courrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielDifferents()])]);
+      courrielControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
       courrielControl.enable();
-      courrielConfirmationControl.setValidators([Validators.required]);
+      courrielConfirmationControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
       courrielConfirmationControl.enable();
-      courrielGroupControl.setValidators([Validators.compose([])])
     }
     else if(typeNotifications === 'Par message texte') {
       telephoneControl.setValidators([Validators.required]);
       telephoneControl.enable();
     }
-    
+
     courrielControl.updateValueAndValidity();
     courrielConfirmationControl.updateValueAndValidity();
+    telephoneControl.updateValueAndValidity();
   }
   
   save(): void {
