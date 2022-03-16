@@ -24,16 +24,21 @@ export class ProblemeComponent implements OnInit {
         prenom: ['', [VerifierCaracteresValidator.longueurMinimum(3), Validators.required]],
         nom: ['', [Validators.maxLength(50), Validators.required]],
         noTypeProbleme: ['', Validators.required], 
+        notification: ['pasnotification'],
         courrielGroup: this.fb.group({
           courriel: [{value: '', disabled: true}],
           courrielConfirmation: [{value: '', disabled: true}],
         }),
         telephone: [{value: '', disabled: true}],
+        descriptionProbleme: ['', [Validators.required, Validators.minLength(5)]],
+        noUnite: '',
+        dateProbleme: {value: Date(), disabled: true}
     });
 
     this.typesProblemes.obtenirTypeProbleme()
     .subscribe(type => this.typesProbleme = type,
-               error => this.errorMessage = <any>error);  
+               error => this.errorMessage = <any>error); 
+    this.problemeForm.get('notification').valueChanges.subscribe(value => this.appliquerNotifications(value));
   }
 
   appliquerNotifications(typeNotifications: string): void {
@@ -56,14 +61,14 @@ export class ProblemeComponent implements OnInit {
     telephoneControl.disable();
 
 
-    if(typeNotifications === 'Par courriel'){
+    if(typeNotifications === 'courriel'){
       courrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielDifferents()])]);
       courrielControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
       courrielControl.enable();
       courrielConfirmationControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
       courrielConfirmationControl.enable();
     }
-    else if(typeNotifications === 'Par message texte') {
+    else if(typeNotifications === 'messageTexte') {
       telephoneControl.setValidators([Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10), Validators.maxLength(10)]);
       telephoneControl.enable();
     }
