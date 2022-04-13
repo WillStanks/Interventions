@@ -9,5 +9,5 @@ export interface IProbleme {
     notification: string,
     noUnite?: string,
     descriptionProbleme: string
-    //dateProbleme?: Date
+    dateProbleme?: Date
 }

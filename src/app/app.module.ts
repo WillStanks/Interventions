@@ -8,13 +8,15 @@ import { ProblemeComponent } from './probleme/probleme.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProblemeService } from './probleme/probleme.service';
+import { ListeProblemeComponent } from './liste-probleme/liste-probleme.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
-    ProblemeComponent
+    ProblemeComponent,
+    ListeProblemeComponent
   ],
   imports: [
     BrowserModule,
