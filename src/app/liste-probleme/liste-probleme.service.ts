@@ -9,15 +9,25 @@ import { IProbleme } from '../probleme/probleme';
 export class ListeProblemeService {
 
   //private baseUrl = 'https://interventionsws2022.azurewebsites.net/Intervention';
-  private baseUrl = 'https://localhost:7132/Intervention/ObtenirProblemes';
+  private baseUrl = 'https://localhost:7132/Intervention';
+
 
   constructor(private http: HttpClient) { }
 
   obtenirProblemes(): Observable<IProbleme[]> {
-    return this.http.get<IProbleme[]>(this.baseUrl).pipe(
+    return this.http.get<IProbleme[]>(this.baseUrl + '/ObtenirProblemes').pipe(
         tap(data => console.log('obtenirProblemes: ' + JSON.stringify(data))),
         catchError(this.handleError)
         );
+  }
+
+  deleteProbleme(id: number): Observable<IProbleme>{    
+    return this.http.delete<IProbleme>(this.baseUrl + '/DeleteProbleme?idProbleme=' + id).pipe(
+      tap(data => console.log('deleteProbleme: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+      );
+      
+       
   }
   private handleError(err: HttpErrorResponse) {
     // in a real world app, we may send the server to some remote logging infrastructure

@@ -7,47 +7,55 @@
         <div class="card-body">
             <h5 class="card-title">Voici la liste des problèmes soumis par les clients</h5>
             <div class="card-text">
-                <table>
-                    <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                        <th>Type de problème</th>
-                        <th>Type de notification</th>
-                        <th>Numéro de téléphone</th>
-                        <th>Courriel</th>
-                        <th># Unité</th>
-                        <th>Description du problème</th>
-                        <th>Date</th>
-                    </tr>
-                    <tr *ngFor="let prob of probleme">
-                        <td>
-                            {{prob.prenom}}
-                        </td>
-                        <td>
-                            {{prob.nom}}
-                        </td>
-                        <td>
-                            {{prob.noTypeProbleme}}
-                        </td>
-                        <td>
-                            {{prob.notification}}
-                        </td>
-                        <td>
-                            {{prob.telephone}}
-                        </td>
-                        <td>
-                            {{prob.courriel}}
-                        </td>
-                        <td>
-                            {{prob.noUnite}}
-                        </td>
-                        <td>
-                            {{prob.descriptionProbleme}}
-                        </td>
-                        <td>
-                            {{prob.dateProbleme | date: 'MMMM d y'}}
-                        </td>
-                    </tr>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Type de problème</th>
+                            <th>Type de notification</th>
+                            <th>Numéro de téléphone</th>
+                            <th>Courriel</th>
+                            <th># Unité</th>
+                            <th>Description du problème</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let prob of probleme">
+                            <td>
+                                <input type="button" class="boutonSupp" value="Supprimer" (click)="showPopup(prob.id)">
+                            </td>
+                            <td>
+                                {{prob.prenom}}
+                            </td>
+                            <td>
+                                {{prob.nom}}
+                            </td>
+                            <td>
+                                {{prob.noTypeProbleme}}
+                            </td>
+                            <td>
+                                {{prob.notification}}
+                            </td>
+                            <td>
+                                {{prob.telephone}}
+                            </td>
+                            <td>
+                                {{prob.courriel}}
+                            </td>
+                            <td>
+                                {{prob.noUnite}}
+                            </td>
+                            <td>
+                                {{prob.descriptionProbleme}}
+                            </td>
+                            <td>
+                                {{prob.dateProbleme | date: 'MMMM d y'}}
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
            
